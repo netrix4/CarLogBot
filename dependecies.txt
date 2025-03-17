@@ -1,2 +1,5 @@
 python-telegram-bot --upgrade
 hupper
+pillow
+qrcode
+cv2
