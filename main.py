@@ -1,8 +1,7 @@
-
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = ""
+TOKEN = "7716146616:AAFNUmOTxQaOOY3UP0xGiUc2C_b5JsPYgnY"
 app = ApplicationBuilder().token(TOKEN).build()
 
 async def reply_list(update: Update, context: ContextTypes.DEFAULT_TYPE):
