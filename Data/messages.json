@@ -1,0 +1,22 @@
+{
+  "messages": [
+    {
+      "Id": 1,
+      "Title": "Primer Mensaje",
+      "Content": "Hola Mundo",
+      "ReceiverId": 1
+    },
+    {
+      "Id": 2,
+      "Title": "Segundo Mensaje",
+      "Content": "Este es el contenido del segundo mensaje",
+      "ReceiverId": 1
+    },
+    {
+      "Id": 2,
+      "Title": "Tercer Mensaje",
+      "Content": "Que es el tercer mensajeeeeee",
+      "ReceiverId": 1
+    }
+  ]
+}
