@@ -12,21 +12,6 @@ OBTENER_NOMBRENICK, OBTENER_OCUPATTION  = range(2)
 api_data = TelegramApiData()
 app = ApplicationBuilder().token(api_data.ApiToken).build()
 
-async def reply_keyboard(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton(text="Este es el boton a00", callback_data="OpcionA"),
-            InlineKeyboardButton(text="Este es el boton a01", callback_data="OpcionB")
-        ],
-        [
-            InlineKeyboardButton(text="Este es el boton a10", callback_data="OpcionC"),
-            InlineKeyboardButton(text="Este es el boton a11", callback_data="OpcionD")
-        ]
-        ])
-    
-    # await update.message.reply_photo("Este es el menu de botones para...", reply_markup=keyboard)
-    await update.message.reply_text("Este es el menu de botones para...", reply_markup=keyboard)
-
 async def main_menu_handler(update: Update, context: CallbackContext):
     await update.callback_query.answer()
     
@@ -68,13 +53,12 @@ async def reply_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_photo(photo_id, caption="Acaso esta es tu carta? 🎩")
 
 app.add_handler(CommandHandler("whatup", reply_whatup))
-app.add_handler(CommandHandler("menutest", reply_register))
-
-app.add_handler(CallbackQueryHandler(main_menu_handler))
-app.add_handler(CommandHandler("kb", reply_keyboard))
-
 app.add_handler(CommandHandler("dumb", reply_as_dumb))
 app.add_handler(MessageHandler(filters.PHOTO, reply_photo))
+
+app.add_handler(CallbackQueryHandler(main_menu_handler))
+app.add_handler(CommandHandler("kb", reply_register))
+
 
 app.add_handler(AddUserController.whole_register_controller)
 
