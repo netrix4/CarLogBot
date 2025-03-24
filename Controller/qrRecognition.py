@@ -3,7 +3,7 @@ import cv2
 
 def generate_QR():
     # data = "https://www.youtube.com/shorts/SXHMnicI6Pg"
-    data = "{nombre: 'Mario', edad: '28'}"
+    data = "{nombre: 'Mario', edad: '27'}"
     qr = qrcode.QRCode(version = 1, box_size = 10, border = 5)
 
     qr.add_data(data)
@@ -28,4 +28,4 @@ def read_QR(file_name: str):
 
 if __name__ == "__main__":
     generate_QR()
-    read_QR()
+    read_QR("./Images/SuperSecretData.jpg")
