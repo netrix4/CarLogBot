@@ -2,9 +2,9 @@ class Message:
     Id: str
     Title: str
     Content: str
-    Receiver: int
+    ReceiverId: int
     def __init__(self):
         self.Id = ""
         self.Title = ""
         self.Content = ""
-        self.Receiver = ""
+        self.ReceiverId = ""
