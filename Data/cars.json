@@ -1,0 +1,23 @@
+[
+  {
+    "Id": 1,
+    "Make": "Ford",
+    "Model": "Galaxy",
+    "Color": "Verde",
+    "OwnerID": 1
+  },
+  {
+    "Id": 2,
+    "Make": "Mazda",
+    "Model": "CX-5",
+    "Color": "Rojo",
+    "OwnerID": 5540497988
+  },
+  {
+    "Id": 3,
+    "Make": "Ford",
+    "Model": "Focus",
+    "Color": "Gris",
+    "OwnerID": 629917593
+  }
+]
