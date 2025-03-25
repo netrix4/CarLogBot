@@ -1,9 +1,9 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import filters, ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, CallbackContext, CallbackQueryHandler
 
-import Controller.AddUserController as AddUserController
-
 from Utils.TelegramApiData import TelegramApiData
+import Controller.AddUserController as AddUserController
+import Controller.AddQrController as AddQrController
 import Controller.ImageReplyController as ImageReplyController
 
 
@@ -54,13 +54,15 @@ async def reply_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 app.add_handler(CommandHandler("whatup", reply_whatup))
 app.add_handler(CommandHandler("dumb", reply_as_dumb))
+app.add_handler(CommandHandler("kb", reply_register))
 app.add_handler(MessageHandler(filters.PHOTO, reply_photo))
 
-app.add_handler(CallbackQueryHandler(main_menu_handler))
-app.add_handler(CommandHandler("kb", reply_register))
-
-
 app.add_handler(AddUserController.whole_register_controller)
+app.add_handler(AddQrController.add_new_qr_controller)
+# app.add_handler(CallbackQueryHandler(AddQrController.qr_type_menu_handler, pattern="(QrFor[A-Za-z]+)"))
+
+app.add_handler(CallbackQueryHandler(main_menu_handler, pattern="^Opcion[A-Z]+"))
+# app.add_handler(CallbackQueryHandler(AddQrController.add_new_qr_controller, pattern="(QrFor[A-Za-z]+)"))
 
 print("Bot iniciado")
 

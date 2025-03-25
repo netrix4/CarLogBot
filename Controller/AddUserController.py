@@ -19,13 +19,13 @@ async def save_ocupattion(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data["ocupattion"] = update.message.text
     await update.message.reply_text(f'Datos agregados. Gracias, {context.user_data["namenick"]} ✅')
 
-    keyboard = InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton(text="Asociar ", callback_data="AddCar"),
-            InlineKeyboardButton(text="Este es el boton a01", callback_data="AddBelonging")
-        ]])
+    # keyboard = InlineKeyboardMarkup([
+    #     [
+    #         InlineKeyboardButton(text="Asociar ", callback_data="AddCar"),
+    #         InlineKeyboardButton(text="Este es el boton a01", callback_data="AddBelonging")
+    #     ]])
     
-    await update.message.reply_text("Ahora agrega un carro o una pertenencia", reply_markup=keyboard)
+    # await update.message.reply_text("Ahora agrega un carro o una pertenencia", reply_markup=keyboard)
 
     newUser = {
         "Id": context._user_id,
