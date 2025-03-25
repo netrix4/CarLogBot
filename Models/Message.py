@@ -4,7 +4,7 @@ class Message:
     Content: str
     ReceiverId: int
     def __init__(self):
-        self.Id = ""
+        self.Id = 0
         self.Title = ""
         self.Content = ""
-        self.ReceiverId = ""
+        self.ReceiverId = 0

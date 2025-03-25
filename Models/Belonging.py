@@ -4,6 +4,7 @@ class Belonging:
     IsLost: bool
     OwnerId: int
     def __init__(self):
+        self.Id = 0
         self.Description = ""
         self.IsLost = False
-        self.OwnerId = int
+        self.OwnerId = 0
