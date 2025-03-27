@@ -2,5 +2,6 @@
 .py
 Images/
 Utils/
-Controller/__pycache__/
-Connector_Mysql/secret.key
+__pycache__/
+*.pyc
+*.pyo
