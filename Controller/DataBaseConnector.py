@@ -6,7 +6,7 @@ MESSAGES_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/messag
 USERS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/users.json"
 
 def agregar_usuario_local(nuevo_objeto):
-    # USERS_JSON = "./../Data/users.json"
+    #USERS_JSON = "./../Data/users.json"
     try:
         with open(USERS_JSON, "r", encoding="utf-8") as archivo:
             try:
@@ -102,8 +102,18 @@ def get_belongings_by_user_id(id_to_search):
     return results
 
 # Ejemplo de uso
+<<<<<<< HEAD
 # nuevo_dato = {
 #     "nombre": "Juan",
 #     "edad": 30,
 #     "ocupacion": "Ingeniero"
 # }
+=======
+#nuevo_dato = {
+#    "nombre": "Ruben caballero",
+#    "edad": 30,
+#    "ocupacion": "IngenieroSmook"
+#}
+
+#agregar_usuario_local(nuevo_dato)
+>>>>>>> dd3b1df (Agrego Conector_Mysql con onsercion a tabla users con id incriptado)

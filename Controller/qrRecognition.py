@@ -29,6 +29,11 @@ def read_QR(file_name: str):
         print("There was some error") 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     # generate_QR("{nombre: 'Mario', edad: '27'}")
     read_QR("./Images/SuperSecretData-629917593.jpg")
+=======
+    generate_QR()
+    read_QR("./Images/SuperSecretData.jpg")
+>>>>>>> dd3b1df (Agrego Conector_Mysql con onsercion a tabla users con id incriptado)
 
