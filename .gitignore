@@ -3,3 +3,4 @@
 Images/
 Utils/
 Controller/__pycache__/
+Connector_Mysql/secret.key
