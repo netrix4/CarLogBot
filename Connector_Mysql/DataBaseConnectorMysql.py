@@ -15,7 +15,7 @@ cipher = Fernet(key)  # Crear el objeto de encriptación
 DB_CONFIG = {
     "host": "localhost",      # Cambia esto si la BD está en otro servidor
     "user": "root",     # Tu usuario de MySQL
-    "password": "4220",  # Tu contraseña de MySQL
+    "password": "",  # Tu contraseña de MySQL
     "database": "qr"  # Nombre de tu base de datos
 }
 
