@@ -4,7 +4,7 @@ MESSAGES_JSON = "./Data/messages.json"
 USERS_JSON = "./Data/users.json"
 
 def agregar_usuario_local(nuevo_objeto):
-    # USERS_JSON = "./../Data/users.json"
+    #USERS_JSON = "./../Data/users.json"
     try:
 
         with open(USERS_JSON, "r", encoding="utf-8") as archivo:
@@ -26,10 +26,10 @@ def agregar_usuario_local(nuevo_objeto):
     print("Objeto agregado correctamente.")
 
 # Ejemplo de uso
-# nuevo_dato = {
-#     "nombre": "Juan",
-#     "edad": 30,
-#     "ocupacion": "Ingeniero"
-# }
+#nuevo_dato = {
+#    "nombre": "Ruben caballero",
+#    "edad": 30,
+#    "ocupacion": "IngenieroSmook"
+#}
 
-# agregar_usuario_local(nuevo_dato)
+#agregar_usuario_local(nuevo_dato)

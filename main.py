@@ -1,4 +1,3 @@
-
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import filters, ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, CallbackContext, CallbackQueryHandler
 
@@ -38,7 +37,6 @@ async def reply_register(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     # await update.message.reply_photo("Este es el menu de botones para...", reply_markup=keyboard)
     await update.message.reply_text("Dame tu informacion para registrarte 💾 ", reply_markup=register_keyboard)
->>>>>>> a9653f0d4a155ccae5f6ce1fc32a9b3e781f8a00
 
 async def reply_whatup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("So whatup")

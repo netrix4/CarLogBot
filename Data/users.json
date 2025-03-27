@@ -13,5 +13,10 @@
         "Id": 5540497988,
         "FullName": "Mayita",
         "Ocupattion": "Cagar, comer y dormir"
+    },
+    {
+        "nombre": "Ruben caballero",
+        "edad": 30,
+        "ocupacion": "IngenieroSmook"
     }
 ]

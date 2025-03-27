@@ -31,8 +31,5 @@ def read_QR(file_name: str):
 
 if __name__ == "__main__":
     generate_QR()
-<<<<<<< HEAD
-    read_QR()
-=======
     read_QR("./Images/SuperSecretData.jpg")
->>>>>>> a9653f0d4a155ccae5f6ce1fc32a9b3e781f8a00
+
