@@ -81,8 +81,19 @@ async def cancel_register(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"Registro de QR cancelado ❎")
     return ConversationHandler.END
 
+def get_cars(id_to_search):
+    try:
+      return DataBaseConnector.get_cars_by_user_id(id_to_search=id_to_search)
+    except ValueError:
+      return [{"error":"Something went wrong {ValueError}"}]
+def get_belongings(id_to_search):
+    try:
+      return DataBaseConnector.get_belongings_by_user_id(id_to_search=id_to_search)
+    except ValueError:
+      return [{"error":"Something went wrong {ValueError}"}]
+
 add_new_qr_controller = ConversationHandler(
-    entry_points=[CommandHandler("nqr", ask_for_qr_type)],
+    entry_points=[CommandHandler("new", ask_for_qr_type)],
     states={
         OBTENER_TIPOQR: [CallbackQueryHandler(qr_type_menu_handler, pattern="QrFor[A-Za-z]+")],
         OBTENER_DETALLES: [MessageHandler(filters.TEXT & ~filters.COMMAND, save_details)],

@@ -1,9 +1,9 @@
 import json
 
-BELONGINGS_JSON = "./Data/belongings.json"
-CARS_JSON = "./Data/cars.json"
-MESSAGES_JSON = "./Data/messages.json"
-USERS_JSON = "./Data/users.json"
+BELONGINGS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/belongings.json"
+CARS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/cars.json"
+MESSAGES_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/messages.json"
+USERS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/users.json"
 
 def agregar_usuario_local(nuevo_objeto):
     # USERS_JSON = "./../Data/users.json"
@@ -65,6 +65,41 @@ def agregar_car_local(nuevo_objeto):
         json.dump(datos, archivo, indent=4, ensure_ascii=False)
 
     print("Carro agregado correctamente.")
+
+def get_cars_by_user_id(id_to_search):
+    try:
+        with open(CARS_JSON, "r", encoding="utf-8") as archivo:
+            try:
+                datos = json.load(archivo)
+                if not isinstance(datos, list):
+                    datos = [datos]
+            except json.JSONDecodeError:
+                datos = []
+    except FileNotFoundError:
+        datos = []
+    results = []
+    for car in datos:
+        if car["OwnerId"] == id_to_search:
+            results.append(car)
+
+    return results
+def get_belongings_by_user_id(id_to_search):
+    try:
+        with open(BELONGINGS_JSON, "r", encoding="utf-8") as archivo:
+            try:
+                datos = json.load(archivo)
+                if not isinstance(datos, list):
+                    datos = [datos]
+            except json.JSONDecodeError:
+                datos = []
+    except FileNotFoundError:
+        datos = []
+    results = []
+    for belonging in datos:
+        if belonging["OwnerId"] == id_to_search:
+            results.append(belonging)
+
+    return results
 
 # Ejemplo de uso
 # nuevo_dato = {

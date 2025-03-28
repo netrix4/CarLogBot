@@ -42,7 +42,7 @@ async def cancel_register(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 whole_register_controller =  ConversationHandler(
-    entry_points=[CommandHandler("registrarse", ask_for_name)],
+    entry_points=[CommandHandler("register", ask_for_name)],
     states={
         OBTENER_NOMBRENICK:[MessageHandler(filters.TEXT & ~filters.COMMAND, ask_for_ocupattion_and_save_name)],
         OBTENER_OCUPATTION:[MessageHandler(filters.TEXT & ~filters.COMMAND, save_ocupattion)],
