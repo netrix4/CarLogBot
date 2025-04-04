@@ -2,6 +2,8 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import filters, CommandHandler, ContextTypes, MessageHandler, ConversationHandler, CallbackContext, CallbackQueryHandler
 
 from ConectaByPosgre.insercion import insert_car, insert_belonging
+from ConectaByPosgre.consultas import get_belonging_by_user,get_car_by_user
+
 
 import Controller.qrRecognition as QrRecognition
 import random, json
@@ -79,3 +81,11 @@ add_new_qr_controller = ConversationHandler(
     },
     fallbacks=[CommandHandler("cancelar", cancel_register)]
 )
+
+def get_cars(user_id: int):
+    """Devuelve la lista de carros asociados a un usuario."""
+    return get_car_by_user(user_id)
+
+def get_belongings(user_id: int):
+    """Devuelve la lista de pertenencias asociadas a un usuario."""
+    return get_belonging_by_user(user_id)

@@ -1,4 +1,4 @@
-from db_config import obtener_conexion
+from ConectaByPosgre.db_config import obtener_conexion
 
 
 def get_car_by_user(owner_id):
@@ -31,12 +31,3 @@ def get_belonging_by_user(owner_id):
 
 
 ##consultas manuales: **********************************TEST AREA************************
-"""
-user_id = 1001
-
-carros = get_car_by_user(user_id)
-#print("Carros del usuario:", carros)
-
-pertenencias = get_belonging_by_user(user_id)
-print("Pertenencias del usuario:", pertenencias)
-"""

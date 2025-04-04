@@ -1,5 +1,5 @@
 import json
-from .db_config import obtener_conexion 
+from ConectaByPosgre.db_config import obtener_conexion
 
 
 
