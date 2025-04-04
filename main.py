@@ -55,7 +55,6 @@ async def reply_register(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ]
         ])
     
-    # await update.message.reply_photo("Este es el menu de botones para...", reply_markup=keyboard)
     await update.message.reply_text("Dame tu informacion para registrarte 💾 ", reply_markup=register_keyboard)
 
 async def reply_whatup(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -74,7 +73,6 @@ async def reply_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # app.add_handler(MessageHandler(filters.TEXT, reply_invalid_text))
 app.add_handler(CommandHandler("whatup", reply_whatup))
 app.add_handler(CommandHandler("dumb", reply_as_dumb))
-app.add_handler(CommandHandler("kb", reply_register))
 app.add_handler(MessageHandler(filters.PHOTO, reply_photo))
 app.add_handler(CommandHandler("list", reply_list_of_qr))
 # app.add_handler(MessageHandler(filters.PHOTO, reply_photo))

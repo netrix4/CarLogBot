@@ -1,5 +1,5 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import filters, CommandHandler, ContextTypes, MessageHandler, ConversationHandler
+from telegram.ext import filters, CommandHandler, ContextTypes, MessageHandler, ConversationHandler, CallbackQueryHandler
 
 import Controller.DataBaseConnector as DataBaseConnector
 
@@ -12,20 +12,26 @@ async def ask_for_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def ask_for_ocupattion_and_save_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print("Id de usuario (se puede usar para la base de datos) ",context._user_id)
     context.user_data["namenick"] = update.message.text
-    await update.message.reply_text("Dame tu rol o actividad en la escuela 👤")
+
+    register_keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton(text="Estudiante", callback_data="ocupattion:Estudiante")
+        ],
+        [
+            InlineKeyboardButton(text="Docente/Administrativo", callback_data="ocupattion:Docente/Adimnistrativo")
+        ]
+        ])
+    
+    await update.message.reply_text("Dame tu rol o actividad en la escuela 👤💾 ", reply_markup=register_keyboard)
+
     return OBTENER_OCUPATTION
 
 async def save_ocupattion(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["ocupattion"] = update.message.text
-    await update.message.reply_text(f'Datos agregados. Gracias, {context.user_data["namenick"]} ✅')
+    await update.callback_query.answer()
+    ocupation = update.callback_query.data.replace('ocupattion:', '')
+    context.user_data["ocupattion"] = ocupation
 
-    # keyboard = InlineKeyboardMarkup([
-    #     [
-    #         InlineKeyboardButton(text="Asociar ", callback_data="AddCar"),
-    #         InlineKeyboardButton(text="Este es el boton a01", callback_data="AddBelonging")
-    #     ]])
-    
-    # await update.message.reply_text("Ahora agrega un carro o una pertenencia", reply_markup=keyboard)
+    await update.callback_query.message.reply_text(f'Datos agregados. Gracias, {context.user_data["namenick"]} ✅')
 
     newUser = {
         "Id": context._user_id,
@@ -45,7 +51,7 @@ whole_register_controller =  ConversationHandler(
     entry_points=[CommandHandler("register", ask_for_name)],
     states={
         OBTENER_NOMBRENICK:[MessageHandler(filters.TEXT & ~filters.COMMAND, ask_for_ocupattion_and_save_name)],
-        OBTENER_OCUPATTION:[MessageHandler(filters.TEXT & ~filters.COMMAND, save_ocupattion)],
+        OBTENER_OCUPATTION:[CallbackQueryHandler(save_ocupattion, pattern='((ocupattion:)[A-Za-z/]+)')],
     },
     fallbacks=[CommandHandler("cancelar", cancel_register)]
 )
