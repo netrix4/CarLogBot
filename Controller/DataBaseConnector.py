@@ -85,6 +85,23 @@ def agregar_mensaje_local(nuevo_objeto):
 
     print("Mensaje agregado correctamente.")
 
+def get_messages_by_user_id(id_to_search):
+    try:
+        with open(MESSAGES_JSON, "r", encoding="utf-8") as archivo:
+            try:
+                datos = json.load(archivo)
+                if not isinstance(datos, list):
+                    datos = [datos]
+            except json.JSONDecodeError:
+                datos = []
+    except FileNotFoundError:
+        datos = []
+    results = []
+    for message in datos:
+        if message["ReceiverId"] == id_to_search:
+            results.append(message)
+
+    return results
 def get_cars_by_user_id(id_to_search):
     try:
         with open(CARS_JSON, "r", encoding="utf-8") as archivo:

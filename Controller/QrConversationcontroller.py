@@ -44,12 +44,18 @@ async def cancel_register(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"Alerta cancelada ❎")
     return ConversationHandler.END
 
+def get_messages(id_to_search):
+    try:
+      return DataBaseConnector.get_messages_by_user_id(id_to_search=id_to_search)
+    except ValueError:
+      return [{"error":"Something went wrong {ValueError}"}]
+
 qr_report_controller =  ConversationHandler(
-    entry_points=[CommandHandler("reportar", start_qr_report_conversation)],
+    entry_points=[CommandHandler("report", start_qr_report_conversation)],
     states={
         OBTENER_QR:[MessageHandler(filters.PHOTO & ~filters.COMMAND, ask_for_title_and_save_qr_info)],
         OBTENER_TITULO:[MessageHandler(filters.TEXT & ~filters.COMMAND, ask_for_content_and_save_title)],
         OBTENER_MENSAJE:[MessageHandler(filters.TEXT & ~filters.COMMAND, save_message_content)]
     },
-    fallbacks=[CommandHandler("cancelar", cancel_register)]
+    fallbacks=[CommandHandler("cancel", cancel_register)]
 )

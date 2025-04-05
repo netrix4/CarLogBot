@@ -53,5 +53,5 @@ whole_register_controller =  ConversationHandler(
         OBTENER_NOMBRENICK:[MessageHandler(filters.TEXT & ~filters.COMMAND, ask_for_ocupattion_and_save_name)],
         OBTENER_OCUPATTION:[CallbackQueryHandler(save_ocupattion, pattern='((ocupattion:)[A-Za-z/]+)')],
     },
-    fallbacks=[CommandHandler("cancelar", cancel_register)]
+    fallbacks=[CommandHandler("cancel", cancel_register)]
 )

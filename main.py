@@ -6,6 +6,7 @@ import Controller.AddUserController as AddUserController
 import Controller.AddQrController as AddQrController
 import Controller.ImageReplyController as ImageReplyController
 import Controller.QrConversationcontroller as QrConversationController
+import Controller.ListingController as ListingController
 
 api_data = TelegramApiData()
 app = ApplicationBuilder().token(api_data.ApiToken).build()
@@ -47,8 +48,10 @@ async def reply_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 app.add_handler(CommandHandler("whatup", reply_whatup))
 app.add_handler(CommandHandler("dumb", reply_as_dumb))
 # app.add_handler(MessageHandler(filters.PHOTO, reply_photo))
-app.add_handler(CommandHandler("list", reply_list_of_qr))
+# app.add_handler(CommandHandler("list", reply_list_of_qr))
 
+app.add_handler(ListingController.listing_qrs_controller)
+app.add_handler(ListingController.listing_messages_controller)
 app.add_handler(AddUserController.whole_register_controller)
 app.add_handler(AddQrController.add_new_qr_controller)
 app.add_handler(QrConversationController.qr_report_controller)

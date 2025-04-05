@@ -98,5 +98,5 @@ add_new_qr_controller = ConversationHandler(
         OBTENER_TIPOQR: [CallbackQueryHandler(qr_type_menu_handler, pattern="QrFor[A-Za-z]+")],
         OBTENER_DETALLES: [MessageHandler(filters.TEXT & ~filters.COMMAND, save_details)],
     },
-    fallbacks=[CommandHandler("cancelar", cancel_register)]
+    fallbacks=[CommandHandler("cancel", cancel_register)]
 )

@@ -1,0 +1,7 @@
+whatup - Say hello
+dumb - Followed by the same text you want back
+register - Create your new user (Only one per Telegram account) 
+new - Create a new QR code
+qrs - Gets a complete list of QRs ( cars and belongings)
+messages - Gets a complete list of mesagges to you
+report - Report something to the owner of the belonging/car
