@@ -2,3 +2,4 @@
 .py
 Images/
 Utils/
+__pycache__
