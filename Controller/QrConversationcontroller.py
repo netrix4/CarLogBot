@@ -3,7 +3,7 @@ from telegram import Update
 from telegram.ext import filters, CommandHandler, ContextTypes, MessageHandler, ConversationHandler
 
 import Controller.DataBaseConnector as DataBaseConnector
-import Controller.ImageReplyController as ImageReplyController
+import Controller.ImagesHandler as ImagesHandler
 
 OBTENER_QR, OBTENER_TITULO, OBTENER_MENSAJE = range(3)
 
@@ -12,7 +12,7 @@ async def start_qr_report_conversation(update: Update, context: ContextTypes.DEF
     return OBTENER_QR
 
 async def ask_for_title_and_save_qr_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    qr_content = await ImageReplyController.get_qr_info(update, context)
+    qr_content = await ImagesHandler.get_qr_info(update, context)
     qr_data = json.loads(qr_content)
     context.user_data["qr_receiver_id"] = qr_data["OwnerId"]
 

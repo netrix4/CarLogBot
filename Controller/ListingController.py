@@ -7,9 +7,7 @@ import Controller.DataBaseConnector as DataBaseConnector
 
 async def reply_list_of_qr(update: Update, context: ContextTypes.DEFAULT_TYPE):
     id_to_list = context._user_id
-    # list_of_car_qrs = AddQrController.get_cars(id_to_list)
     list_of_car_qrs = DataBaseConnector.get_cars_by_user_id_local(id_to_search=id_to_list)
-    # list_of_belongings_qrs = AddQrController.get_belongings(id_to_list)
     list_of_belongings_qrs = DataBaseConnector.get_belongings_by_user_id_local(id_to_search=id_to_list)
 
     formated_results = "Estos son los resultados que encontré:\nCarros 🚗:\n"
@@ -37,7 +35,6 @@ async def reply_list_of_messages(update: Update, context: ContextTypes.DEFAULT_T
         formated_results += f'{counter:02d} - Titulo: {message["Title"]}\nContenido: {message["Content"]}\n'
     counter = 0
     
-
     await update.message.reply_text(formated_results)
 
 listing_qrs_controller = CommandHandler("qrs", reply_list_of_qr)

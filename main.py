@@ -4,7 +4,7 @@ from telegram.ext import filters, ApplicationBuilder, CommandHandler, ContextTyp
 from Utils.TelegramApiData import TelegramApiData
 import Controller.AddUserController as AddUserController
 import Controller.AddQrController as AddQrController
-import Controller.ImageReplyController as ImageReplyController
+import Controller.ImagesHandler as ImagesHandler
 import Controller.QrConversationcontroller as QrConversationController
 import Controller.ListingController as ListingController
 
@@ -24,7 +24,7 @@ async def reply_as_dumb(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"Oh, did u mean {text_params}")
 
 async def reply_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    photo_id = ImageReplyController.get_qr_info(update, context)
+    photo_id = ImagesHandler.get_qr_info(update, context)
     await update.message.reply_photo(photo_id, caption="Acaso esta es tu carta? 🎩")
 
 app.add_handler(CommandHandler("whatup", reply_whatup))
