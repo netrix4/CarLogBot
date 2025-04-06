@@ -1,7 +1,6 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import filters, CommandHandler, ContextTypes, MessageHandler, ConversationHandler, CallbackQueryHandler
 
-from ConectaByPosgre.insercion import insert_user
 import Controller.DataBaseConnector as DataBaseConnector
 
 OBTENER_NOMBRENICK, OBTENER_OCUPATTION  = range(2)
@@ -43,8 +42,8 @@ async def save_ocupattion(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Ocupattion": context.user_data["ocupattion"]
     }
 
-    # insert_user(int(newUser["Id"]), newUser)  # Insertar en la base de datos PostgreSQL
-    DataBaseConnector.agregar_usuario_local(newUser)
+    # DataBaseConnector.insert_user_postgres(int(newUser["Id"]), newUser)  # Insertar en la base de datos PostgreSQL
+    DataBaseConnector.insert_user_local(newUser)
     
     return ConversationHandler.END
 

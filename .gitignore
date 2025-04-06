@@ -1,6 +1,7 @@
+__pycache__
 .code
 .py
-Images/
-Utils/
-__pycache__
-
+Images/*.jpg
+Utils/*.py
+*.jpg
+*.png

@@ -35,7 +35,7 @@ async def save_message_content(update: Update, context: ContextTypes.DEFAULT_TYP
         "ReceiverId": context.user_data["qr_receiver_id"]
     }
 
-    DataBaseConnector.agregar_mensaje_local(newMessage)
+    DataBaseConnector.insert_message_local(newMessage)
     await update.message.reply_text(f'Mensaje agregado. Gracias ✅')
     return ConversationHandler.END
 
@@ -43,12 +43,6 @@ async def cancel_register(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data.clear() 
     await update.message.reply_text(f"Alerta cancelada ❎")
     return ConversationHandler.END
-
-def get_messages(id_to_search):
-    try:
-      return DataBaseConnector.get_messages_by_user_id(id_to_search=id_to_search)
-    except ValueError:
-      return [{"error":"Something went wrong {ValueError}"}]
 
 qr_report_controller =  ConversationHandler(
     entry_points=[CommandHandler("report", start_qr_report_conversation)],
