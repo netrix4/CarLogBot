@@ -1,8 +1,8 @@
-
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import filters, CommandHandler, ContextTypes, MessageHandler, ConversationHandler, CallbackQueryHandler
 
 from ConectaByPosgre.insercion import insert_user
+import Controller.DataBaseConnector as DataBaseConnector
 
 OBTENER_NOMBRENICK, OBTENER_OCUPATTION  = range(2)
 
@@ -11,7 +11,8 @@ async def ask_for_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return OBTENER_NOMBRENICK
 
 async def ask_for_ocupattion_and_save_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = update.message.from_user.id  # Obtener el ID de Telegram como identificador único
+    # user_id = update.message.from_user.id  # Obtener el ID de Telegram como identificador único
+    user_id = context._user_id
     context.user_data["user_id"] = user_id
     context.user_data["namenick"] = update.message.text
 
@@ -42,7 +43,9 @@ async def save_ocupattion(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Ocupattion": context.user_data["ocupattion"]
     }
 
-    insert_user(int(user_id), new_user)  # Insertar en la base de datos PostgreSQL
+    # insert_user(int(newUser["Id"]), newUser)  # Insertar en la base de datos PostgreSQL
+    DataBaseConnector.agregar_usuario_local(newUser)
+    
     return ConversationHandler.END
 
 async def cancel_register(update: Update, context: ContextTypes.DEFAULT_TYPE):

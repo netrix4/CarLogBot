@@ -3,3 +3,4 @@ hupper
 pillow
 qrcode
 opencv-python #cv2 #upgraded
+psycopg2-binary

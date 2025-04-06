@@ -1,9 +1,9 @@
 import json
 
-BELONGINGS_JSON = "/home/mario/Documents/ITE2025-1/CarLogBot/Data/belongings.json"
-CARS_JSON = "/home/mario/Documents/ITE2025-1/CarLogBot/Data/cars.json"
-MESSAGES_JSON = "/home/mario/Documents/ITE2025-1/CarLogBot/Data/messages.json"
-USERS_JSON = "/home/mario/Documents/ITE2025-1/CarLogBot/Data/users.json"
+BELONGINGS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/belongings.json"
+CARS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/cars.json"
+MESSAGES_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/messages.json"
+USERS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/users.json"
 
 def agregar_usuario_local(nuevo_objeto):
     try:
