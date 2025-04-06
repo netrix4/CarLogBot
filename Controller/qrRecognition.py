@@ -1,6 +1,7 @@
 import qrcode
 import cv2
 
+
 def generate_QR(data: str, name: str):
     # data = "https://www.youtube.com/shorts/SXHMnicI6Pg"
     # data = "{nombre: 'Mario', edad: '27'}"
@@ -17,6 +18,7 @@ def read_QR(file_name: str):
     # image_name = "./Images/SuperSecretData.jpg"
     image_name = file_name
     qr_image = cv2.imread(image_name)
+
     qr_detector = cv2.QRCodeDetector()
 
     data, vertices_array, binary_qrcode = qr_detector.detectAndDecode(qr_image)
@@ -31,3 +33,4 @@ def read_QR(file_name: str):
 if __name__ == "__main__":
     # generate_QR("{nombre: 'Mario', edad: '27'}")
     read_QR("./Images/SuperSecretData-629917593.jpg")
+

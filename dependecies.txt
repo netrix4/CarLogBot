@@ -1,5 +1,5 @@
-python-telegram-bot --upgrade
+python-telegram-bot 
 hupper
 pillow
 qrcode
-cv2
+opencv-python #cv2 #upgraded
