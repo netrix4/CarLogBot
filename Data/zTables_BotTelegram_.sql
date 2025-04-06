@@ -1,3 +1,7 @@
+CREATE DATABASE db_telegrambot;
+
+USE db_telegrambot;
+
 CREATE TABLE users (
     id BIGINT PRIMARY KEY,
     data JSONB NOT NULL
