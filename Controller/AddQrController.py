@@ -89,3 +89,4 @@ def get_cars(user_id: int):
 def get_belongings(user_id: int):
     """Devuelve la lista de pertenencias asociadas a un usuario."""
     return get_belonging_by_user(user_id)
+

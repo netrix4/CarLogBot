@@ -7,3 +7,6 @@ Registrar usuario
 registrar pertenencias
 Aceptar foto qr
 Mandar mensaje al dueno
+
+
+DESIGN-DOC: https://github.com/Rubenabimalec/design-docs/blob/main/spanish/README.md

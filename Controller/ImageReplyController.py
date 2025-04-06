@@ -25,4 +25,4 @@ async def get_qr_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if image is not None:
             cv2.imwrite("./Images/processed_temp.jpg", image)  
 
-    qrRecognition.read_QR("./Images/processed_temp.jpg")
+    return qrRecognition.read_QR("./Images/processed_temp.jpg")

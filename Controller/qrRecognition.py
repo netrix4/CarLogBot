@@ -28,6 +28,8 @@ def read_QR(file_name: str):
     else:
         print("There was some error") 
 
+    return data
+
 if __name__ == "__main__":
     # generate_QR("{nombre: 'Mario', edad: '27'}")
     read_QR("./Images/SuperSecretData-629917593.jpg")
