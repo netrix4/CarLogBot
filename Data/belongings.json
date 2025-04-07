@@ -1,38 +1,3 @@
 [
-    {
-        "Id": 1,
-        "Description": "Esta es la mochila perrona",
-        "IsLost": false,
-        "OwnerId": 1
-    },
-    {
-        "Id": 2,
-        "Description": "Este es el termo perron",
-        "IsLost": false,
-        "OwnerId": 1
-    },
-    {
-        "Id": 3,
-        "Description": "Mochila de Maya",
-        "IsLost": false,
-        "OwnerId": 5540497988
-    },
-    {
-        "Id": 4,
-        "Description": "Mochileichon de Mario",
-        "IsLost": false,
-        "OwnerId": 629917593
-    },
-    {
-        "Id": 8402,
-        "Description": "Es",
-        "IsLost": false,
-        "OwnerId": 629917593
-    },
-    {
-        "Id": 9863,
-        "Description": "Pues es mi termo, qué más",
-        "IsLost": false,
-        "OwnerId": 629917593
-    }
+
 ]

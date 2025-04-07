@@ -1,23 +1,12 @@
 [
-  {
-    "Id": 1,
-    "FullName": "Chespirito Gomez",
-    "Ocupattion": "Docente"
-  },
-  {
-    "Id": 629917593,
-    "FullName": "Vannia mailob",
-    "Ocupattion": "Estudiante"
-  },
-  {
-    "Id": 5540497988,
-    "FullName": "Mayita",
-    "Ocupattion": "Cagar, comer y dormir"
-  },
-  {
-    "Id": 629917593,
-    "FullName": "Mario",
-    "Ocupattion": "Estudiante"
-  }
+    {
+        "Id": 5875501355,
+        "FullName": "caballero",
+        "Ocupattion": "estudiante"
+    },
+    {
+        "Id": 5875501355,
+        "FullName": "simon",
+        "Ocupattion": "caballero"
+    }
 ]
-
