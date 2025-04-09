@@ -1,12 +1,9 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import filters, CommandHandler, ContextTypes, MessageHandler, ConversationHandler, CallbackContext, CallbackQueryHandler
 
-from ConectaByPosgre.insercion import insert_car, insert_belonging
-from ConectaByPosgre.consultas import get_belonging_by_user,get_car_by_user
-
-
-import Controller.qrRecognition as QrRecognition
-import random, json
+import Controller.DataBaseConnector as DataBaseConnector
+import Controller.ImagesHandler as ImagesHandler
+import math,random, json
 
 OBTENER_TIPOQR, OBTENER_DETALLES  = range(2)
 
@@ -26,13 +23,9 @@ async def qr_type_menu_handler(update: Update, context: CallbackContext):
     context.user_data["qr_type"] = button_data
 
     if button_data == "QrForCar":
-        await update.callback_query.message.reply_text(
-            "Seleccionaste Carro, separado por espacios, dame:\nMarca\nModelo\nColor"
-        )
+        await update.callback_query.message.reply_text("Seleccionaste Carro, separado por espacios, dame:\nMarca\nModelo\nColor")
     elif button_data == "QrForBelonging":
-        await update.callback_query.message.reply_text(
-            "Seleccionaste Pertenencia, separado por espacios, dame:\nUna descripción de la pertenencia"
-        )
+        await update.callback_query.message.reply_text("Seleccionaste Pertenencia, separado por espacios, dame:\nUna descripción de la pertenencia")
     return OBTENER_DETALLES
 
 async def save_details(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -40,31 +33,41 @@ async def save_details(update: Update, context: ContextTypes.DEFAULT_TYPE):
     detalles = update.message.text.split()
     tipo_qr = context.user_data["qr_type"]
 
-    if tipo_qr == "QrForCar" and len(detalles) >= 3:
-        car_id = random.randint(2000, 9999)  # Generar ID único
-        newEntry = {
-            "Make": detalles[0],
-            "Model": detalles[1],
-            "Color": detalles[2]
-        }
-        insert_car(car_id, user_id, newEntry)
-    elif tipo_qr == "QrForBelonging":
-        belonging_id = random.randint(3000, 9999)
-        newEntry = {
-            "Description": update.message.text,
-            "IsLost": False
-        }
-        insert_belonging(belonging_id, user_id, newEntry)
+    if tipo_qr:
+
+        if tipo_qr == "QrForCar" and len(detalles) >= 3:
+            car_id = random.randint(2000, 9999)  # Generar ID único
+            newEntry = {
+                "Id": math.ceil(random.uniform(9,9999)),
+                "Make": detalles[0],
+                "Model": detalles[1],
+                "Color": detalles[2],
+                "OwnerId": context._user_id
+            }
+            # DataBaseConnector.insert_car_postgres(car_id, user_id, newEntry)
+            DataBaseConnector.insert_car_local(newEntry)
+
+        elif tipo_qr == "QrForBelonging":
+            belonging_id = random.randint(3000, 9999)
+            newEntry = {
+                "Id": math.floor(random.uniform(9,9999)),
+                "Description": update.message.text,
+                "IsLost": False,
+                "OwnerId": context._user_id
+            }
+            # DataBaseConnector.insert_belonging_postgres(belonging_id, user_id, newEntry)
+            DataBaseConnector.insert_belonging_local(newEntry)
+    
+        try:
+            ImagesHandler.generate_QR(json.dumps(newEntry), newEntry["OwnerId"])
+            await update.message.reply_text('QR nuevo asociado. Gracias, ✅')
+            await update.message.reply_photo(photo=open(f'./Images/SuperSecretData-{newEntry["OwnerId"]}.jpg', 'rb'), caption="Aquí está tu nuevo QR, Guardalo bien.")
+        except:
+          print('An exception occurred')
+
     else:
         await update.message.reply_text("Formato incorrecto, intenta de nuevo ❌")
         return OBTENER_DETALLES
-
-    try:
-        QrRecognition.generate_QR(json.dumps(newEntry), user_id)
-        await update.message.reply_text("QR nuevo asociado. Gracias, ✅")
-        await update.message.reply_photo(photo=open(f'./Images/SuperSecretData-{user_id}.jpg', 'rb'), caption="Aquí está tu nuevo QR, guárdalo bien.")
-    except Exception as e:
-        await update.message.reply_text(f"Error al generar QR: {e} ❌")
 
     return ConversationHandler.END
 
@@ -81,11 +84,3 @@ add_new_qr_controller = ConversationHandler(
     },
     fallbacks=[CommandHandler("cancelar", cancel_register)]
 )
-
-def get_cars(user_id: int):
-    """Devuelve la lista de carros asociados a un usuario."""
-    return get_car_by_user(user_id)
-
-def get_belongings(user_id: int):
-    """Devuelve la lista de pertenencias asociadas a un usuario."""
-    return get_belonging_by_user(user_id)
