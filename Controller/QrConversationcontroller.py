@@ -13,9 +13,19 @@ async def start_qr_report_conversation(update: Update, context: ContextTypes.DEF
 
 async def ask_for_title_and_save_qr_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     qr_content = await ImagesHandler.get_qr_info(update, context)
-    qr_data = json.loads(qr_content)
-    context.user_data["qr_receiver_id"] = qr_data["OwnerId"]
+    try:
+        qr_data = json.loads(qr_content)
+    except Exception as e:
+        #Informa al usuario si el QR está mal y no revienta el flujo.
+        print("❌ Error interpretando el QR:", e)
+        await update.message.reply_text("El QR no contiene información válida .")
+        return ConversationHandler.END
+    
+    #IMPRIME LA DATA DEL QR
+    print("✅ QR escaneado con éxito. Contenido:")
+    print(json.dumps(qr_data, indent=2))  # formato para leer en consola
 
+    context.user_data["qr_receiver_id"] = qr_data["OwnerId"]
     await update.message.reply_text("¿Qué problema quieres reportar? 🚨\nDame el asunto de tu mensaje para el/la responsable:")
     return OBTENER_TITULO
 
@@ -29,13 +39,22 @@ async def save_message_content(update: Update, context: ContextTypes.DEFAULT_TYP
     context.user_data["message"] = update.message.text
 
     newMessage = {
-        "Id": math.ceil(random.uniform(9,9999)),
-        "Title": context.user_data["title"],
+        "Id": math.ceil(random.uniform(9,9999)), #number of message
+        "Title": context.user_data["title"], 
         "Content": context.user_data["message"],
-        "ReceiverId": context.user_data["qr_receiver_id"]
+        "ReceiverId": context.user_data["qr_receiver_id"] #<--- dueño del objeto
     }
 
-    DataBaseConnector.insert_message_local(newMessage)
+    #DataBaseConnector.insert_message_local(newMessage)
+    # Insertar en la base de datos PostgreSQL
+    DataBaseConnector.insert_message_postgres(
+        newMessage["Id"],
+        newMessage["ReceiverId"],
+        {
+            "Title": newMessage["Title"],
+            "Content": newMessage["Content"]
+        }
+    )
     await update.message.reply_text(f'Mensaje agregado. Gracias ✅')
     return ConversationHandler.END
 
