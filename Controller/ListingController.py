@@ -7,8 +7,8 @@ import Controller.DataBaseConnector as DataBaseConnector
 
 async def reply_list_of_qr(update: Update, context: ContextTypes.DEFAULT_TYPE):
     id_to_list = context._user_id
-    list_of_car_qrs = DataBaseConnector.get_cars_by_user_id_local(id_to_search=id_to_list)
-    list_of_belongings_qrs = DataBaseConnector.get_belongings_by_user_id_local(id_to_search=id_to_list)
+    list_of_car_qrs = DataBaseConnector.get_car_by_user_postgres(owner_id=id_to_list)
+    list_of_belongings_qrs = DataBaseConnector.get_belonging_by_user_postgres(owner_id=id_to_list)
 
     formated_results = "Estos son los resultados que encontré:\nCarros 🚗:\n"
     counter = 0
@@ -25,7 +25,7 @@ async def reply_list_of_qr(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def reply_list_of_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
     id_to_list = context._user_id
-    list_of_messages = DataBaseConnector.get_messages_by_user_id_local(id_to_list)
+    list_of_messages = DataBaseConnector.get_messages_by_user_id_postgres(id_to_list)
 
     formated_results = "Estos son los mensajes que encontré 🎫:\n"
 

@@ -1,6 +1,6 @@
 import json
 from Utils.db_config import obtener_conexion
-
+"""
 BELONGINGS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/belongings.json"
 CARS_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/cars.json"
 MESSAGES_JSON = "/home/mario/Documents/ITE2025-1/Backend-1/CarLogBot/Data/messages.json"
@@ -137,6 +137,7 @@ def get_belongings_by_user_id_local(id_to_search):
             results.append(belonging)
 
     return results
+"""
 
 def get_car_by_user_postgres(owner_id):
     conn= obtener_conexion()
@@ -149,7 +150,7 @@ def get_car_by_user_postgres(owner_id):
     results = [(row[0]) for row in cursor.fetchall()]
     cursor.close()
     conn.close()
-    print("¡  YA SE HIZO  !")
+    print("¡  YA SE HIZO, CONSULTASTES LOS AUTOS  !")
     return results
 
 def get_belonging_by_user_postgres(owner_id):
@@ -163,7 +164,21 @@ def get_belonging_by_user_postgres(owner_id):
     results = [(row[0]) for row in cursor.fetchall()]
     cursor.close()
     conn.close()
-    print("¡  YA SE HIZO  !")
+    print("¡  YA SE HIZO, CONSULTASTES LAS PERTENENCIAS GENERALES  !")
+    return results
+
+def get_messages_by_user_id_postgres(owner_id):
+    conn= obtener_conexion()
+    if conn is None:
+        print("No se pudo establecer conexión con la base de datos.")
+        return
+    cursor = conn.cursor()
+    query = "SELECT data FROM messages WHERE receiver_id = %s;"
+    cursor.execute(query, (owner_id,))
+    results = [(row[0]) for row in cursor.fetchall()]
+    cursor.close()
+    conn.close()
+    print("¡  YA SE HIZO, CONSULTASTES LOS MENSAGES O NOTIFICACIONES !")
     return results
 
 def insert_user_postgres(user_id,data):
@@ -177,7 +192,7 @@ def insert_user_postgres(user_id,data):
     cursor.execute(query,(user_id,json.dumps(data)))
     conn.commit()
     cursor.close()
-    print("¡  YA SE HIZO  !")
+    print("¡  YA SE HIZO, INSERTASTE USUARIO NUEVO  !")
 
 def insert_car_postgres(car_id,owner_id,data):
     conn=obtener_conexion()
@@ -188,12 +203,12 @@ def insert_car_postgres(car_id,owner_id,data):
     
     print(f"Insertando: ID={car_id}, OwnerID={owner_id}, Data={json.dumps(data)}")
 
-    query="INSERT INTO cars(id,owner_id,data) VALUES(%s,%s,%s);"
+    query="INSERT INTO cars(id,receiver_id,data) VALUES(%s,%s,%s);"
     cursor.execute(query,(car_id,owner_id,json.dumps(data)))
     conn.commit()
     cursor.close()
     conn.close()
-    print(" YA SE HIZO  !")
+    print(" YA SE HIZO, INSERRTASTE UN AUTO !")
 
 def insert_belonging_postgres(belonging_id,owner_id,data):
     conn= obtener_conexion()
@@ -209,7 +224,21 @@ def insert_belonging_postgres(belonging_id,owner_id,data):
     conn.commit()
     cursor.close()
     conn.close()
-    print("¡  YA SE HIZO  !")
+    print("¡  YA SE HIZO, INSERTASTE UNA PERTENENCIA  !")
+
+def insert_message_postgres(id_message,owner_id,data):
+    conn= obtener_conexion()
+    if conn is None:
+        print("No se pudo establecer conexión con la base de datos.")
+        return
+    cursor=conn.cursor()
+    print(f"Insertando: ID_MESSAGE={id_message}, receiver_id={owner_id}, Data={json.dumps(data)}")
+    query= "INSERT INTO messages(id,receiver_id,data) VALUES (%s,%s,%s)"
+    cursor.execute(query, (id_message, owner_id, json.dumps(data)))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    print("¡  YA SE HIZO, INSERTASTE UN MENSAJE NUEVO  !")
 
 
 # Ejemplo de uso
