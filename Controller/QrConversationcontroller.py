@@ -56,6 +56,7 @@ async def save_message_content(update: Update, context: ContextTypes.DEFAULT_TYP
         }
     )
     await update.message.reply_text(f'Mensaje agregado. Gracias ✅')
+    await context.bot.send_message(chat_id=int(newMessage["ReceiverId"]), text=f"Tienes un nuevo mensaje:\nTitulo:{newMessage['Title']}\nMensaje:\n{newMessage['Content']}")
     return ConversationHandler.END
 
 async def cancel_register(update: Update, context: ContextTypes.DEFAULT_TYPE):

@@ -77,7 +77,6 @@ async def save_details(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # En caso de error de formato
         await update.message.reply_text("Formato incorrecto, intenta de nuevo ❌")
         return OBTENER_DETALLES
-
     return ConversationHandler.END
 # Manejo de cancelación de la creación de QR
 async def cancel_register(update: Update, context: ContextTypes.DEFAULT_TYPE):
