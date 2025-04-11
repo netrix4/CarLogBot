@@ -19,7 +19,7 @@ async def get_qr_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print('An exception fetching the images from telegram occurred')
 
 # 🧾 Función para generar un código QR a partir de una cadena de texto
-def generate_QR(data: str, name: str):
+def generate_QR(data: str, name: str, qr_type: str):
     # data = "https://www.youtube.com/shorts/SXHMnicI6Pg"
     # Creamos la instancia del generador QR
     qr = qrcode.QRCode(version = 1, box_size = 10, border = 5)
@@ -27,7 +27,9 @@ def generate_QR(data: str, name: str):
     qr.add_data(data)
     qr.make(fit = True)
     # Configuramos los colores y generamos la imagen
-    img = qr.make_image(fill_color = 'black', back_color = 'white')
+    color= 'red' if qr_type == "QrForCar" else 'blue' 
+
+    img = qr.make_image(fill_color = color, back_color = 'white')
     
     # Guardamos el archivo localmente con un nombre aleatorio
     """Esto permite usar fácilmente ese archivo en otras partes del 

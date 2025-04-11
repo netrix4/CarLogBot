@@ -65,7 +65,7 @@ async def save_details(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
         try:
               # Generar el código QR con los datos del objeto
-             qr_file_path = ImagesHandler.generate_QR(json.dumps(newEntry), newEntry["OwnerId"])
+             qr_file_path = ImagesHandler.generate_QR(json.dumps(newEntry), newEntry["OwnerId"], tipo_qr)
              # Enviar imagen del QR al usuario
              await update.message.reply_photo(photo=open(qr_file_path, 'rb'), caption="Aquí está tu nuevo QR, Guárdalo bien.")
              #await update.message.reply_photo(photo=open(f'./Images/SuperSecretData-{newEntry["OwnerId"]}.jpg', 'rb'), caption="Aquí está tu nuevo QR, Guardalo bien.")
