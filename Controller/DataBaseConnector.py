@@ -203,7 +203,7 @@ def insert_car_postgres(car_id,owner_id,data):
     
     print(f"Insertando: ID={car_id}, OwnerID={owner_id}, Data={json.dumps(data)}")
 
-    query="INSERT INTO cars(id,receiver_id,data) VALUES(%s,%s,%s);"
+    query="INSERT INTO cars(id,owner_id,data) VALUES(%s,%s,%s);"
     cursor.execute(query,(car_id,owner_id,json.dumps(data)))
     conn.commit()
     cursor.close()
