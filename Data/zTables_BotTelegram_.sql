@@ -1,6 +1,6 @@
 CREATE DATABASE db_telegrambot;
 
-USE db_telegrambot;
+\c db_telegrambot;
 
 CREATE TABLE users (
     id BIGINT PRIMARY KEY,
